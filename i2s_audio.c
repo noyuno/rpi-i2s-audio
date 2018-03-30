@@ -59,7 +59,7 @@ static struct platform_device snd_rpi_simple_card_device = {
 };
 
 
-int hello_init(void)
+int m_init(void)
 {
 const char *dmaengine = "bcm2708-dmaengine"; //module name
 int ret;
@@ -69,17 +69,16 @@ pr_alert("request module load '%s': %d\n",dmaengine, ret);
 ret = platform_device_register(&snd_rpi_simple_card_device);
 pr_alert("register platform device '%s': %d\n",snd_rpi_simple_card_device.name, ret);
 
-pr_alert("Hello World :)\n");
 return 0;
 }
 
-void hello_exit(void)
+void m_exit(void)
 {// you'll have to sudo modprobe -r the card & codec drivers manually (first?)
 platform_device_unregister(&snd_rpi_simple_card_device);
-pr_alert("Goodbye World!\n");
+pr_alert("unregister my_loader\n");
 }
-module_init(hello_init);
-module_exit(hello_exit);
+module_init(m_init);
+module_exit(m_exit);
 MODULE_DESCRIPTION("ASoC simple-card I2S setup");
 MODULE_AUTHOR("Plugh Plover");
 MODULE_LICENSE("GPL v2");

@@ -1,2 +1,2 @@
-obj-m := my_loader.o
+obj-m := i2s_audio.o
 
